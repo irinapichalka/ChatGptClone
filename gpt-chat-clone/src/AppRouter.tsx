@@ -9,18 +9,21 @@ import Chat from './pages/Chat';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './PrivateRoute';
 import TestAuth from './app/components/TestAuth';
+import Layout from './Layout';
 
 const AppRouter: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/test" element={<TestAuth />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/chat" element={<Chat />} />
+          </Route>
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/test" element={<TestAuth />} />
-        <Route element={<PrivateRoute />}>
-          <Route path="/chat" element={<Chat />} />
-        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Routes>
